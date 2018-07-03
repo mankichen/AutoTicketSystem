@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <title>确认购买</title>
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet"  type="text/css"/>
+    <script th:src="@{/scripts/jquery.smartselect-1.1.min.js}"></script>
+    <script th:src="@{/scripts/fun.js}"></script>
+
+</head>
+<body>
+
+<div class="statisticBox w-782"  layout:fragment="content">
+    <div class="dataDetailList mt-12">
+        <table id="results" class="dataListTab">
+            <thead>
+            <tr>
+                <th>车辆编号</th>
+                <th>出发地</th>
+                <th>发车时间</th>
+                <th>目的地</th>
+                <th>到站时间</th>
+                <th>剩余票数</th>
+                <th>票价</th>
+            </tr>
+            </thead>
+            <tr>
+                <td th:text="${carServiceDO.carNum}">车辆编号</td>
+                <td th:text="${carServiceDO.startStation}">出发地</td>
+                <td th:text="${carServiceDO.startTime}">发车时间</td>
+                <td th:text="${carServiceDO.endStation}">目的地</td>
+                <td th:text="${carServiceDO.endTime}">到站时间</td>
+                <td th:text="${carServiceDO.availableTickets}">剩余票数</td>
+                <td th:text="${carServiceDO.price}">票价</td>
+            </tr>
+        </table>
+
+
+        <div class="radiusGrayBox782">
+            <form id="queryBuy"  method="post">
+            <div class="radiusGrayTop782"></div>
+            <div class="radiusGrayMid782">
+                <div class="dataSearchBox forUserRadius">
+                    <ul>
+                        <li>
+                            <label class="preInpTxt f-left">请投入RMB,完成购买</label>
+                            <input id="getRMBvalue" type="text" class="inp-list f-left w-200" placeholder="模拟出入金额"/>
+                        </li>
+                        <li>
+                            <a th:href="@{'javascript:sureBuy('+${carServiceDO.id}+','+${carServiceDO.price}+')'}" class="blueBtn-62X30 f-right" id="buyBtn">确认</a>
+                            <a href="javascript:go_back()" class="blueBtn-62X30 f-right" id="cancelBtn">取消</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <div class="tableFootLine">
+            <div class="pagebarList pagination"/>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

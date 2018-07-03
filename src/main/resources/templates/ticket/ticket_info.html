@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="fragments/layout">
+<head>
+    <title>购买成功</title>
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet"  type="text/css"/>
+
+    <script th:src="@{/scripts/jquery.smartselect-1.1.min.js}"></script>
+    <script type="text/javascript">
+        function go_back() {
+            window.location.replace("../../")
+        }
+    </script>
+</head>
+<body>
+
+<div class="statisticBox w-782"  layout:fragment="content">
+    <div class="dataDetailList mt-12">
+        <table id="results" class="dataListTab">
+            <thead>
+            <tr>
+				<th>车票编号</th>
+                <th>车辆编号</th>
+                <th>出发地</th>
+                <th>发车时间</th>
+                <th>目的地</th>
+                <th>到站时间</th>
+            </tr>
+            </thead>
+            <tr>
+			    <td th:text="${ticketInfo.ticketNum}">车票编号</td>
+                <td th:text="${ticketInfo.carNum}">车辆编号</td>
+                <td th:text="${ticketInfo.startStation}">出发地</td>
+                <td th:text="${ticketInfo.startTime}">发车时间</td>
+                <td th:text="${ticketInfo.endStation}">目的地</td>
+                <td th:text="${ticketInfo.endTime}">到站时间</td>
+            </tr>
+        </table>
+
+
+        <div class="radiusGrayBox782">
+            <form id="queryBuy" method="post">
+            <div class="radiusGrayTop782"></div>
+            <div class="radiusGrayMid782">
+                <div class="dataSearchBox forUserRadius">
+                    <ul>
+                        <li>
+                            <label class="preInpTxt f-left">购买成功,剩余的钱</label>
+                            <input id="chargeMoney" type="text" class="inp-list f-left w-200" th:value="${ticketInfo.charge}" name="money" />
+                        </li>
+                        <li>
+                            <a href="javascript:go_back()" class="blueBtn-62X30 f-right" id="buyBtn">确认</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </form>
+        </div>
+
+        <div class="tableFootLine">
+            <div class="pagebarList pagination"/>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./db/data;AUTO_SERVER=TRUE;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: master
+    password: m1s2e3
+    platform: h2
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+
+
+katharsis:
+    resourcePackage: org.system.future.domain
+    domainName: http://localhost:8080
+    pathPrefix: /api
+

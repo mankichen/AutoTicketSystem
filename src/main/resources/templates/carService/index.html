@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="fragments/layout">
+<head>
+    <title>在线购票系统</title>
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet"  type="text/css"/>
+    <script th:src="@{/scripts/jquery.smartselect-1.1.min.js}"></script>
+    <script type="text/javascript">
+        function purchase(id) {
+            window.location.assign("../saleRecord/pay="+id)
+        }
+        
+        function findByPlace() {
+            var place = document.getElementById('name').value;
+            window.location.assign("../carService/place="+place)
+        }
+    </script>
+</head>
+<body>
+
+<div class="statisticBox w-782"  layout:fragment="content">
+    <form id="queryForm" method="get">
+    <div class="radiusGrayBox782">
+        <div class="radiusGrayTop782"></div>
+        <div class="radiusGrayMid782">
+            <div class="dataSearchBox forUserRadius">
+                <ul>
+                    <li>
+                        <label class="preInpTxt f-left">目的地</label>
+                        <input type="text" class="inp-list f-left w-200" placeholder="按目的地名搜索" id="name"  name="name"/>
+                    </li>
+                    <li>
+                        <a href="javascript:findByPlace()" class="blueBtn-62X30 f-right" id="searchBtn">查询</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </form>
+    <div class="dataDetailList mt-12">
+        <table id="results" class="dataListTab">
+            <thead>
+            <tr>
+                <th>车辆编号</th>
+                <th>出发地</th>
+                <th>发车时间</th>
+                <th>目的地</th>
+                <th>到站时间</th>
+                <th>剩余票数</th>
+                <th>票价</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tr th:each="carList:${carServiceList}">
+                <td th:text="${carList.carNum}">车辆编号</td>
+                <td th:text="${carList.startStation}">出发地</td>
+                <td th:text="${carList.startTime}">发车时间</td>
+                <td th:text="${carList.endStation}">目的地</td>
+                <td th:text="${carList.endTime}">到站时间</td>
+                <td th:text="${carList.availableTickets}">剩余票数</td>
+                <td th:text="${carList.price}">票价</td>
+                <!--<td th:text="${carList.id}" class="test${carList.id}"></td>-->
+                <td><button type="button" th:onclick="'javascript:purchase(\''+${carList.id}+'\')'">购买</button></td>
+            </tr>
+        </table>
+        <div class="tableFootLine">
+            <div class="pagebarList pagination"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
